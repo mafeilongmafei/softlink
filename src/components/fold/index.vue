@@ -13,7 +13,7 @@
         :data-index="index"
         :data-id="item.id"
       >
-        <span>{{item.name}}</span>
+        <span >{{item.name}}</span>
       </div>
     </div>
   </div>

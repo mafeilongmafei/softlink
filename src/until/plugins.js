@@ -25,12 +25,14 @@ import {
   Popup,
   Collapse,
   CollapseItem,
-  Loading
+  Loading,
+  Notify
 } from "vant";
 Vue.use(Lazyload, {
   loading:
     "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1147105645,2116899631&fm=26&gp=0.jpg"
 });
+
 
 Vue.use(Swipe).use(SwipeItem);
 Vue.use(Tab).use(Tabs);
@@ -44,6 +46,7 @@ Vue.use(Popup);
 Vue.use(DropdownMenu).use(DropdownItem);
 Vue.use(VueWechatTitle);
 Vue.use(Collapse).use(CollapseItem)
+Vue.use(Notify);
 
 
 

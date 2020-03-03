@@ -1,14 +1,13 @@
-
 var path = require("path");
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
-
 module.exports = {
   publicPath: "/",
   devServer: {
     open: true,
-    port : 8080,
+    port: 8080,
+    disableHostCheck: true,
     proxy: {
       "/app.php/": {
         target: process.env.VUE_APP_BASE_URL,

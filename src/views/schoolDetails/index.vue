@@ -15,19 +15,20 @@
     <div class="imgview">
       <!-- <h2>校园风光</h2> -->
       <div class="h2">校园风光</div>
-      <div class="imgList ClearFix">
-        <!-- 解决移动端图片刷新才能出现    初始化的太早 -->
-        <swiper :options="swiperOption" v-if="list.length">
-          <img v-gallery:group1 v-for="img in list" :src="imgUrl + img" :key="img" />
-        </swiper>
-      </div>
+      <Scroll :isY="false" class="scimg">
+       <div class="imgList" style="width:400px">
+         <img v-gallery:group1 v-for="img in list" :src="imgUrl + img" :key="img" />
+       </div>
+        
+      </Scroll>
     </div>
   </div>
 </template>
 <script>
 import { getSchoolDetails } from "api/api.js";
-// import "swiper/dist/css/swiper.css";
-import { swiper } from "vue-awesome-swiper";
+
+import Scroll from "../../components/scroll/index.vue";
+import BScroll from 'better-scroll'
 export default {
   data() {
     return {
@@ -60,7 +61,7 @@ export default {
     }
   },
   components: {
-    swiper
+    Scroll
   }
 };
 </script>
@@ -129,17 +130,21 @@ export default {
     box-sizing: border-box;
     border-bottom: 3.333vw solid #f5f5f5;
     overflow: hidden;
-
-    .imgList {
-      width: 375px;
+    .scimg {
+      width: 359px;
       height: 82px;
-      overflow: hidden;
       white-space: nowrap;
-      img {
-        width: 132px;
-        height: 82px;
-        margin-right: 9px;
-      }
+       overflow: hidden;
+
+      .imgList {
+        display: inline-block;
+          img {
+           width: 132px;
+          height: 82px;
+          margin-right: 9px;
+          
+          }
+        }
     }
   }
 }

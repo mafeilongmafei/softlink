@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container ccc">
     <div class="header">
       <van-dropdown-menu class="menu">
         <van-dropdown-item
@@ -20,7 +20,8 @@
         </p>
       </van-dropdown-menu>
     </div>
-    <main class="main">
+    <Scroll class="Scroll" @pullUp="eventFunction">
+       <main class="main">
       <van-popup
         v-model="show"
         position="top"
@@ -87,9 +88,9 @@
           <div class="ranking">
             <div class="ranking_title">排名</div>
             <div class="input_price">
-              <input type="text" :value="start_ranking" />
+              <input type="text" v-model="start_ranking" />
               <span></span>
-              <input type="text" :value="end_ranking" />
+              <input type="text" v-model="end_ranking" @change="setInputRank(false)"/>
             </div>
             <div
               class="btn_gather clearFix"
@@ -114,15 +115,17 @@
           <van-button type="info" class="menu_filte_footer_btn" @click="ok">确认</van-button>
         </div>
       </van-popup>
-
       <ul class="school" ref="school" >
+        
+
         <li
           class="school_list clearFix"
           v-for="school in data.school"
           :key="school.id"
           :data-id="school.id"
-          @click="navToDetails"
+           @click="navToDetails" 
         >
+        
           <div class="left">
             <div class="item_top clearFix">
               <img v-lazy="imgUrl + school.logo_img" />
@@ -151,16 +154,22 @@
           </div>
           <p v-show="isPageEqualTotalPage == page">我也是有底线的</p>
         </li>
+
       </ul>
     </main>
+    </Scroll>
+   
 
-    <Footer />
+    <Footer class="fs"/>
   </div>
 </template>
 <script>
+
+
 import Fold from "../../components/fold/index";
 // let page = 1;
 import Footer from "../../components/footer/index.vue";
+import Scroll from "../../components/scroll/index.vue"
 import { getSchoolList, getStateSchool, geteducation } from "api/api.js";
 
 export default {
@@ -187,12 +196,14 @@ export default {
       index3: 0, //切换用的index,
       doMain1: [],
       doMain2: [],
-      rankArr: [] //排名,
+      rankArr: [], //排名,
+      isUpdateRankArr : true //排名是否更新
     };
   },
   components: {
     Footer,
-    Fold
+    Fold,
+    Scroll
   },
   created() {
     this.getSchoolData();
@@ -218,7 +229,7 @@ export default {
       this.show2 = false;
     },
     //获取学校列表
-    async getSchoolData() {
+    async getSchoolData(callBack , cal) {
       let arr = [
         {
           key: "page",
@@ -242,7 +253,7 @@ export default {
         }
       ];
       let res = await getSchoolList(arr);
-      this.unbind();
+      // this.unbind();
 
       if (this.page == 1 || !this.page) {
         this.data = res.data;
@@ -252,15 +263,20 @@ export default {
         this.data.school = countData;
         this.switch = true;
       }
-      this.isScrollBottom();
-      this.rankArr = this.splitNumber(parseInt(res.data.count));
+      // this.isScrollBottom();
+      this.isUpdateRankArr ?  this.rankArr = this.splitNumber(parseInt(res.data.count)) : "" 
+      this.$nextTick(()=>{
+        cal && cal() // DOM 结构发生变化后，重新初始化BScroll
+        callBack && callBack()// 上拉加载动作完成后调用此方法告诉BScroll完成一次上拉动作
+      })
+
     },
     //schoolList是否到底
     isScrollBottom() {
       //数据获取后 也就是dom更新后 在进行获取dom
       this.$nextTick(() => {
         let main = document.getElementsByClassName("main")[0];
-        main.addEventListener("scroll", this.eventFunction, false);
+        // main.addEventListener("scroll", this.eventFunction, false);
       });
     },
     //解绑
@@ -269,25 +285,25 @@ export default {
       removeEventListener("scroll", this.eventFunction, false);
     },
     //绑定执行的函数
-    eventFunction() {
-      let main = document.getElementsByClassName("main")[0];
-      let obj = this.$refs.school;
-      // //可视内容区高
-      let clientHeight = obj.clientHeight;
-      // //实际宽高
-      let scroll = obj.scrollHeight;
-      //溢出高度
-      let overflowHight = scroll - clientHeight;
-      // //滚动的距离
-      //为啥求的是main的滚动距离,因为子元素把父元素撑开了,求滚动就是求父元素
-      let scrollY = main.scrollTop;
-      if (scrollY > overflowHight - 50) {
+    eventFunction(callBack , cal) {
+      // let main = document.getElementsByClassName("main")[0];
+      // let obj = this.$refs.school;
+      // // //可视内容区高
+      // let clientHeight = obj.clientHeight;
+      // // //实际宽高
+      // let scroll = obj.scrollHeight;
+      // //溢出高度
+      // let overflowHight = scroll - clientHeight;
+      // // //滚动的距离
+      // //为啥求的是main的滚动距离,因为子元素把父元素撑开了,求滚动就是求父元素
+      // let scrollY = main.scrollTop;
+      // if (scrollY > overflowHight - 50) {
         if (this.switch) {
           this.page = this.page + 1;
           this.switch = false;
-          this.getSchoolData();
+          this.getSchoolData(callBack , cal);
         }
-      }
+      // }
     },
     //获取哪国学校
     async getStateSchoolList() {
@@ -319,6 +335,7 @@ export default {
     },
     //找到一个元素所有字节点
     getChildrenElement(ob) {
+      this.rankArr = []
       this.start_ranking = null;
       this.end_ranking = null;
       this.page = 1;
@@ -356,6 +373,9 @@ export default {
             break;
         }
         this.cate = id;
+        
+      this.isUpdateRankArr = true
+
         this.getSchoolData();
       }
     },
@@ -393,7 +413,8 @@ export default {
     },
     //排名
     setInputRank(ob) {
-      let { e, className } = ob;
+     if(ob){
+        let { e, className } = ob;
       let obj = e.target;
       let rak = obj.dataset.rank;
       if (!rak) {
@@ -404,6 +425,11 @@ export default {
       this.start_ranking = arr3[0] - 0;
       this.end_ranking = arr3[1] - 0;
       this.getSchoolData();
+     }else {
+       this.start_ranking = this.start_ranking == null ? 0 : this.start_ranking
+       this.getSchoolData();
+     }
+     this.isUpdateRankArr = false
     },
     //重置
     reset() {
@@ -526,6 +552,7 @@ export default {
   .container_menu {
     display: flex;
     flex-direction: column;
+
 
     .menu_filter {
       flex: 1;
@@ -693,5 +720,27 @@ export default {
     z-index: 3;
     transform: rotate(-35deg);
   }
+}
+.Scroll {
+  
+}
+
+.ccc {
+  position: relative !important;
+  .Scroll {
+    // 在不知道中间的大小可一这样,设置中间的大小 
+    position: absolute;
+    top: 48px;
+    bottom: 52.98px;
+    left: 0;
+    right : 0;
+    overflow: hidden;
+  }
+  .fs {
+  position: absolute !important;
+  bottom: 0;
+  left:0;
+  right : 0;
+}
 }
 </style>

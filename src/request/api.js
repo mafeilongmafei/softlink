@@ -1,5 +1,6 @@
 import http from "../request/index.js";
 
+
 //得到轮播图片
 export function getCarousel() {
   return http.get("/app.php/carousel");
@@ -53,3 +54,14 @@ export function getSchoolDetails(id) {
   fd.append("id", id);
   return http.post("/app.php/yxk_details" , fd)
 } 
+//qq登录获取accessToken
+export function getAccessToken( appkey, code, redirect_uri) {
+         return http.get(`https://graph.qq.com/oauth2.0/token?
+  grant_type=authorization_code&client_id=${process.env.VUE_APP_APPID}&client_secret=${appkey}&code=${code}&redirect_uri=${redirect_uri}`);
+}
+//获取qq登录的OpenID
+export function getOpenID(access_token) {
+  return http.get(`https://graph.qq.com/oauth2.0/me?access_token=${access_token}
+  `);
+}
+

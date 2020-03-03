@@ -2,20 +2,71 @@
 
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
 
-    <link rel="icon" href="<%= BASE_URL %>tit.png">
+    <link rel="icon" href="<%= BASE_URL %>tit.png" />
     <title>Soft link-知识与分享决定你的高度</title>
-    <link rel="stylesheet" href="./reset.css">
-   <link rel="stylesheet" href="http://at.alicdn.com/t/font_1000881_fmrzf5sjsn.css">
+    <link rel="stylesheet" href="./reset.css" />
+    <link
+      rel="stylesheet"
+      href="http://at.alicdn.com/t/font_1000881_fmrzf5sjsn.css"
+    />
+    <!-- <script src="https://js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.0.1.52.js"></script> -->
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but softlink doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry but softlink doesn't work properly without JavaScript
+        enabled. Please enable it to continue.</strong
+      >
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+   <script>
+      document.addEventListener("plusready", function() {
+        var webview = plus.webview.currentWebview();
+        plus.key.addEventListener("backbutton", function() {
+          webview.canBack(function(e) {
+            if (e.canBack) {
+              webview.back();
+            } else {
+              //webview.close(); //hide,quit
+              //plus.runtime.quit();
+              //首页返回键处理
+              //处理逻辑：1秒内，连续两次按返回键，则退出应用；
+              var first = null;
+              plus.key.addEventListener(
+                "backbutton",
+                function() {
+                  //首次按键，提示‘再按一次退出应用’
+                  if (!first) {
+                    first = new Date().getTime();
+                    console.log("再按一次退出应用");
+                    setTimeout(function() {
+                      first = null;
+                    }, 1000);
+                  } else {
+                    if (new Date().getTime() - first < 1500) {
+                      plus.runtime.quit();
+                    }
+                  }
+                },
+                false
+              );
+            }
+          });
+        });
+      });
+    </script>
+    <script type="text/javascript"  charset="utf-8"
+    src="http://connect.qq.com/qc_jssdk.js"
+    data-appid="<%= VUE_APP_APPID %>"
+    data-redirecturi="<%= VUE_APP_REDIRECTURI  %>"
+></script>
   </body>
 </html>
