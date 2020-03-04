@@ -379,6 +379,7 @@ export default {
         this.getSchoolData();
       }
     },
+    //根据返回数量,动态生成可选择的数量
     splitNumber(number) {
       let n = 50;
       let n2 = 20;
@@ -426,7 +427,7 @@ export default {
       this.end_ranking = arr3[1] - 0;
       this.getSchoolData();
      }else {
-       this.start_ranking = this.start_ranking == null ? 0 : this.start_ranking
+       this.start_ranking = this.start_ranking == null ? 1 : this.start_ranking
        this.getSchoolData();
      }
      this.isUpdateRankArr = false
@@ -736,11 +737,11 @@ export default {
     right : 0;
     overflow: hidden;
   }
-  .fs {
-  position: absolute !important;
-  bottom: 0;
-  left:0;
-  right : 0;
-}
+//   .fs {
+//   position: absolute !important;
+//   bottom: 0;
+//   left:0;
+//   right : 0;
+// }
 }
 </style>

@@ -1,118 +1,92 @@
 <template>
   <div class="container">
-    <main class="main">
-      <!-- 轮播 -->
-      <header class="header">
-        <van-swipe :autoplay="3000">
-          <van-swipe-item v-for="carouse in carouselArr" :key="carouse.id">
-            <img v-lazy="imgUrl + carouse.app_img" />
-          </van-swipe-item>
-        </van-swipe>
-      </header>
-      <section class="menu1 section">
-        <a href class="menu1-item">
-          <img src="../../assets/images/meu1.png" alt />
-          <p>留学攻略</p>
-        </a>
-        <a href class="menu1-item">
-          <img src="../../assets/images/menu2.png" alt />
-          <p>限时免费</p>
-        </a>
-        <a href class="menu1-item">
-          <img src="../../assets/images/menu3.png" alt />
-          <p>明星学长</p>
-        </a>
-      </section>
-      <section class="menu2 section">
-        <a href class="men2-item">
-          <img src="../../assets/images/menu4.png" alt />
-        </a>
-      </section>
-      <section class="menu3 section">
-        <div class="menu3-item">
-          <img src="../../assets/images/menu5.png" alt />
-          <div class="menu_direction">
-            <h3 data-v-05e38dbe>GRE单词21天训练营</h3>
-            <p data-v-05e38dbe>大家一起背单词，团购更优惠</p>
-          </div>
-        </div>
-        <div class="menu3-item">
-          <img src="../../assets/images/menu6.png" alt />
-          <div class="menu_direction">
-            <h3 data-v-05e38dbe>VIP督导课</h3>
-            <p data-v-05e38dbe>1位语言导师+1位顾问，全方位跟进你的语言学习</p>
-          </div>
-        </div>
-      </section>
-      <!-- 精品推荐课列表 -->
-      <article class="article">
-        <section class="article_title">精品推荐课</section>
-        <section class="course_list">
-          <ul>
-            <li
-              class="course_item"
-              v-for="item in obj.jp_course"
-              :key="item.id"
-              :data-id="item.id"
-              @click="navDetails"
-            >
-              <img v-lazy="imgUrl + item.logo" alt />
-              <div class="course_info">
-                <h3>{{item.name}}</h3>
-                <div class="tag">
-                  <div class="tag_item">{{ "套课: "+ item.count + "时"}}</div>
-                </div>
-                <div class="price_info">
-                  <div class="price">
-                    <p>￥{{item.zb_price}}</p>
-                    <p>￥{{item.price}}</p>
-                  </div>
-                  <div class="study">{{item.sum_count}}人学习</div>
-                </div>
-              </div>
-            </li>
-          </ul>
+    <Scroll class="ScrollWarper">
+      <main class="main">
+        <!-- 轮播 -->
+
+        <header class="header">
+          <van-swipe :autoplay="3000">
+            <van-swipe-item v-for="carouse in carouselArr" :key="carouse.id">
+              <img v-lazy="imgUrl + carouse.app_img" />
+            </van-swipe-item>
+          </van-swipe>
+        </header>
+        <section class="menu1 section">
+          <a href class="menu1-item">
+            <img src="../../assets/images/meu1.png" alt />
+            <p>留学攻略</p>
+          </a>
+          <a href class="menu1-item">
+            <img src="../../assets/images/menu2.png" alt />
+            <p>限时免费</p>
+          </a>
+          <a href class="menu1-item">
+            <img src="../../assets/images/menu3.png" alt />
+            <p>明星学长</p>
+          </a>
         </section>
-      </article>
-    </main>
-    <!-- footer -->
-    <!-- <footer class="footer">
-      <router-link to="/" class="footer_item" exact>
-        <div class="routerTive">
-          <i class="iconfont icon-shouye1"></i>
-          <p>首页</p>
-        </div>
-      </router-link>
+        <section class="menu2 section">
+          <a href class="men2-item">
+            <img src="../../assets/images/menu4.png" alt />
+          </a>
+        </section>
+        <section class="menu3 section">
+          <div class="menu3-item">
+            <img src="../../assets/images/menu5.png" alt />
+            <div class="menu_direction">
+              <h3 data-v-05e38dbe>GRE单词21天训练营</h3>
+              <p data-v-05e38dbe>大家一起背单词，团购更优惠</p>
+            </div>
+          </div>
+          <div class="menu3-item">
+            <img src="../../assets/images/menu6.png" alt />
+            <div class="menu_direction">
+              <h3 data-v-05e38dbe>VIP督导课</h3>
+              <p data-v-05e38dbe>1位语言导师+1位顾问，全方位跟进你的语言学习</p>
+            </div>
+          </div>
+        </section>
+        <!-- 精品推荐课列表 -->
+        <article class="article">
+          <section class="article_title">精品推荐课</section>
+          <section class="course_list">
+            <ul>
+              <li
+                class="course_item"
+                v-for="item in obj.jp_course"
+                :key="item.id"
+                :data-id="item.id"
+                @click="navDetails"
+              >
+                <img v-lazy="imgUrl + item.logo" alt />
+                <div class="course_info">
+                  <h3>{{ item.name }}</h3>
+                  <div class="tag">
+                    <div class="tag_item">{{ "套课: " + item.count + "时" }}</div>
+                  </div>
+                  <div class="price_info">
+                    <div class="price">
+                      <p>￥{{ item.zb_price }}</p>
+                      <p>￥{{ item.price }}</p>
+                    </div>
+                    <div class="study">{{ item.sum_count }}人学习</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </article>
+      </main>
+    </Scroll>
 
-      <router-link to="/classify" class="footer_item" exact>
-        <div class="routerTive">
-          <i class="iconfont icon-shangpinfenlei"></i>
-          <p>分类</p>
-        </div>
-      </router-link>
-
-      <router-link to="/school" class="footer_item" exact>
-        <div class="routerTive">
-          <i class="iconfont icon-yuanxiaoku_"></i>
-          <p>院校库</p>
-        </div>
-      </router-link>
-
-      <router-link to="/mine" class="footer_item" exact>
-        <div class="routerTive">
-          <i class="iconfont icon-wode"></i>
-          <p>我的</p>
-        </div>
-      </router-link>
-    </footer> -->
-
-    <Footer/>
+    <Footer class="footer"></Footer>
   </div>
 </template>
 <script>
 import { getCarousel, getLesson } from "api/api.js";
 import { create } from "domain";
-import Footer from "../../components/footer/index.vue"
+import Footer from "../../components/footer/index.vue";
+import Scroll from "../../components/scroll/index.vue";
 export default {
   data() {
     return {
@@ -142,15 +116,16 @@ export default {
       this.$router.push({ path: "/prese", query: { id } });
     }
   },
-  components : {
+  components: {
+    Scroll,
     Footer
   }
 };
 </script>
 <style lang="scss" scoped>
 .main {
-  flex: 1;
-  overflow: auto;
+//   flex: 1;
+//   overflow: auto;
   .header {
     //   @include bg-image("../../assets/images/banner");
     height: 155px;
@@ -312,4 +287,17 @@ export default {
   width: 40px;
   height: 40px;
 }
-</style>>
+
+.ScrollWarper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+   bottom: 52.98px;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+// .footer {
+  
+// }
+</style>

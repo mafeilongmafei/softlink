@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" ref="wrapper">
-    <div class="content">
+    <div class="content" :style="'display:' + isBlock ">
       <slot></slot>
     </div>
   </div>
@@ -11,8 +11,12 @@ export default {
   props : {
     isY : {
       type : Boolean,
-      default : true
-    }
+      default : true,
+    },
+     isBlock : {
+        type : String,
+        default : "block"
+      }
   },
   mounted() {
      let bscroll = new BScroll(this.$refs.wrapper, {
@@ -42,9 +46,9 @@ export default {
 </script>
 <style scoped>
 
-.content {
-  /*块元素,子元素宽度无法撑开 , 得把他变成inline-block */
+/* .content {
+  块元素,子元素宽度无法撑开 , 得把他变成inline-block
   display: inline-block;
-}
+} */
 
 </style>>

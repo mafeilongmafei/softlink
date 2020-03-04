@@ -15,7 +15,7 @@
     <div class="imgview">
       <!-- <h2>校园风光</h2> -->
       <div class="h2">校园风光</div>
-      <Scroll :isY="false" class="scimg">
+      <Scroll :isY="false" class="scimg" isBlock="inline-block" >
        <div class="imgList" style="width:400px">
          <img v-gallery:group1 v-for="img in list" :src="imgUrl + img" :key="img" />
        </div>

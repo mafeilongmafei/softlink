@@ -18,7 +18,8 @@ const router = new VueRouter({
       path: "/",
       component: Home,
       meta: {
-        title: "首页"
+        title: "首页",
+        paht : "/"
       }
     },
     {

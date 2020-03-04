@@ -46,8 +46,9 @@
   </footer>
 </template>
 <script>
-// <div class="mu-ripple-wrapper"></div>
-export default {};
+export default {
+ 
+};
 </script>
 <style lang="scss" scoped>
 .footer {
@@ -55,6 +56,11 @@ export default {};
   display: flex;
   align-items: center;
   justify-content: space-around;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
   .footer_item {
     width: 87.5px;
     height: 100%;
