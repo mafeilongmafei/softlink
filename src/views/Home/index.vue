@@ -88,6 +88,7 @@ import { create } from "domain";
 import Footer from "../../components/footer/index.vue";
 import Scroll from "../../components/scroll/index.vue";
 export default {
+  name : "home",
   data() {
     return {
       carouselArr: [], //轮播arr

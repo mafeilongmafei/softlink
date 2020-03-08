@@ -6,6 +6,8 @@ import "./assets/css/common.css";
 
 import FastClick from "fastclick"
 FastClick.attach(document.body);
+import "./until/exit.js"
+
 
 
 (function() {

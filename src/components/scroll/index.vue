@@ -8,6 +8,7 @@
 <script>
 import BScroll from "better-scroll";
 export default {
+  name :"scroll",
   props : {
     isY : {
       type : Boolean,

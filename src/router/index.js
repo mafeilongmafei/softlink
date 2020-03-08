@@ -13,13 +13,14 @@ const schoolDetails = () => import("../views/schoolDetails/index.vue");
 Vue.use(VueRouter);
 
 const router = new VueRouter({
+  mode: "hash",
   routes: [
     {
       path: "/",
       component: Home,
       meta: {
         title: "首页",
-        paht : "/"
+        paht: "/"
       }
     },
     {
@@ -61,8 +62,8 @@ const router = new VueRouter({
     {
       path: "/schoolDetails",
       component: schoolDetails,
-      meta : {
-        title : "学校详情"
+      meta: {
+        title: "学校详情"
       }
     }
   ],

@@ -20,7 +20,6 @@
         </p>
       </van-dropdown-menu>
     </div>
-    <Scroll class="Scroll" @pullUp="eventFunction">
        <main class="main">
       <van-popup
         v-model="show"
@@ -115,6 +114,7 @@
           <van-button type="info" class="menu_filte_footer_btn" @click="ok">确认</van-button>
         </div>
       </van-popup>
+      <Scroll class="Scroll" @pullUp="eventFunction">
       <ul class="school" ref="school" >
         
 
@@ -156,8 +156,8 @@
         </li>
 
       </ul>
+      </Scroll>
     </main>
-    </Scroll>
    
 
     <Footer class="fs"/>
@@ -173,6 +173,7 @@ import Scroll from "../../components/scroll/index.vue"
 import { getSchoolList, getStateSchool, geteducation } from "api/api.js";
 
 export default {
+  name :  "school",
   data() {
     return {
       show: false,
@@ -721,9 +722,6 @@ export default {
     z-index: 3;
     transform: rotate(-35deg);
   }
-}
-.Scroll {
-  
 }
 
 .ccc {

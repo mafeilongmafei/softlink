@@ -14,7 +14,7 @@
         <h2>{{ user.userInfo.nickname}}</h2>
         <img :src=" user.userInfo.headimgurl" alt />
       </div>
-      <div class>
+      <div>
         <!-- <van-button type="info" @click="login">qq登录</van-button> -->
         <span id="qqLoginBtn"></span>
       </div>
@@ -27,6 +27,7 @@ import Footer from "../../components/footer/index.vue";
 import { log } from "util";
 import { getAccessToken, getOpenID } from "../../request/api";
 export default {
+  name : "mine",
   data() {
     return {
       data: [],
@@ -42,8 +43,8 @@ export default {
     this.AppPlus();
     QC.Login({
       btnId: "qqLoginBtn", //插入按钮的节点id
-       loginFun : (res)=>{
-         alert(res)
+       loginFun : (reqData, opts)=>{
+         console.log(reqData, opts)
        }
     });
   },

@@ -20,6 +20,7 @@
 </template>
 <script>
 export default {
+  name : "fold",
   data() {
     return {
       isClickMore: false

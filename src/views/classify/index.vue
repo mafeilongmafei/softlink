@@ -7,6 +7,7 @@
 <script>
 import Footer from "../../components/footer/index.vue";
 export default {
+  name : "classify",
   components: {
     Footer
   }
