@@ -2,7 +2,7 @@ import axios from "axios";
 
 var instance = axios.create({
   timeout: 5000,
-  // baseURL : process.env.VUE_APP_BASE_URL
+  baseURL : process.env.VUE_APP_BASE_URL
   // headers: {
   //   "Content-type": "application/x-www-form-urlencoded"
   // }
