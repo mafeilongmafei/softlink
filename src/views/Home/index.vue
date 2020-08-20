@@ -3,7 +3,6 @@
     <Scroll class="ScrollWarper">
       <main class="main">
         <!-- 轮播 -->
-
         <header class="header">
           <van-swipe :autoplay="3000">
             <van-swipe-item v-for="carouse in carouselArr" :key="carouse.id">
@@ -51,13 +50,7 @@
           <section class="article_title">精品推荐课</section>
           <section class="course_list">
             <ul>
-              <li
-                class="course_item"
-                v-for="item in obj.jp_course"
-                :key="item.id"
-                :data-id="item.id"
-                @click="navDetails"
-              >
+              <li class="course_item" v-for="item in obj.jp_course" :key="item.id" :data-id="item.id" @click="navDetails">
                 <img v-lazy="imgUrl + item.logo" alt />
                 <div class="course_info">
                   <h3>{{ item.name }}</h3>
@@ -78,7 +71,6 @@
         </article>
       </main>
     </Scroll>
-
     <Footer class="footer"></Footer>
   </div>
 </template>
@@ -87,8 +79,9 @@ import { getCarousel, getLesson } from "api/api.js";
 import { create } from "domain";
 import Footer from "../../components/footer/index.vue";
 import Scroll from "../../components/scroll/index.vue";
+import { debug } from 'console';
 export default {
-  name : "home",
+  name: "home",
   data() {
     return {
       carouselArr: [], //轮播arr
@@ -113,7 +106,9 @@ export default {
     },
     //跳转到详细页
     navDetails(e) {
+     
       let id = e.currentTarget.dataset.id;
+      
       this.$router.push({ path: "/prese", query: { id } });
     }
   },
@@ -122,62 +117,75 @@ export default {
     Footer
   }
 };
+
 </script>
 <style lang="scss" scoped>
 .main {
-//   flex: 1;
-//   overflow: auto;
+
+  //   flex: 1;
+  //   overflow: auto;
   .header {
     //   @include bg-image("../../assets/images/banner");
     height: 155px;
     width: 100%;
+
     //   background-repeat: no-repeat;
     //   background-size: 100%;
     img {
       width: 100%;
       height: 100%;
     }
+
     .van-swipe {
       height: 155px;
     }
   }
+
   .section {
     height: 93px;
     border-bottom: 3px solid #f0f6fe;
   }
+
   .menu1 {
     display: flex;
     justify-content: space-around;
+
     .menu1-item {
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
       img {
         width: 47.5px;
         height: 47.5px;
       }
+
       p {
         color: #333;
         font-size: 11px;
       }
     }
   }
+
   .menu2 {
     .men2-item {
       height: 100%;
       padding: 7px;
       box-sizing: border-box;
+
       img {
         width: 100%;
         height: 100%;
       }
     }
   }
+
   .menu3 {
     display: flex;
     padding-bottom: 5px;
+
     .menu3-item {
       width: 50%;
       padding-left: 6px;
@@ -189,27 +197,33 @@ export default {
         height: 27px;
         vertical-align: middle;
       }
+
       .menu_direction {
         padding-left: 6px;
         vertical-align: middle;
+
         p {
           font-size: 11px;
           line-height: 20px;
           padding-right: 9px;
         }
+
         h3 {
           font-size: 12px;
         }
       }
     }
+
     .menu3-item:first-child {
       border-right: 1px solid #f8f8f8;
     }
   }
+
   .article {
     padding: 21px 10px 0px 10px;
 
     position: relative;
+
     &::after {
       content: "";
       position: absolute;
@@ -218,34 +232,43 @@ export default {
       width: 3px;
       height: 16px;
       background-color: #4285f4;
+     
     }
+
     .article_title {
       font-size: 16px;
       padding-left: 9px;
       padding-bottom: 10px;
     }
+
     .course_list {
       width: 100%;
       height: 100%;
+
       ul {
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
+
         .course_item {
           width: 174px;
           height: 206px;
           padding-top: 8px;
+
           img {
             width: 100%;
             height: 108px;
           }
+
           .course_info {
             height: 88px;
             padding-top: 10px;
+
             h3 {
               font-size: 10px;
               color: #333;
             }
+
             .tag {
               display: flex;
               flex-wrap: wrap;
@@ -259,11 +282,13 @@ export default {
                 align-items: center;
               }
             }
+
             .price_info {
               height: 40px;
               display: flex;
               justify-content: space-between;
               font-size: 9px;
+
               .price {
                 p {
                   color: #ffa100;
@@ -271,6 +296,7 @@ export default {
                 }
               }
             }
+
             .study {
               color: #999999;
               font-size: 9px;
@@ -293,12 +319,14 @@ export default {
   width: 100%;
   position: relative;
   overflow: hidden;
-   bottom: 52.98px;
+  bottom: 52.98px;
   top: 0;
   left: 0;
   right: 0;
 }
+
 // .footer {
-  
+
 // }
+
 </style>

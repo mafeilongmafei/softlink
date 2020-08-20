@@ -9,6 +9,7 @@ const mine = () => import("views/mine/index.vue");
 const school = () => import("views/school/index.vue");
 const classify = () => import("views/classify/index.vue");
 const schoolDetails = () => import("../views/schoolDetails/index.vue");
+const video = () => import("../views/video/index");
 
 Vue.use(VueRouter);
 
@@ -65,6 +66,10 @@ const router = new VueRouter({
       meta: {
         title: "学校详情"
       }
+    },
+    {
+      path: "/video",
+      component: video,
     }
   ],
   linkActiveClass: "Routeractive ani" //设置样式的class

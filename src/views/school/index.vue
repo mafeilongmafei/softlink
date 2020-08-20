@@ -454,6 +454,7 @@ export default {
     //跳转到school详情页
     navToDetails(e) {
       let id = e.currentTarget.dataset.id
+      debugger
       this.$router.push({ path : "schoolDetails" , query : {id}})
 
     }
@@ -693,7 +694,7 @@ export default {
     word-break: break-all;
 
     span {
-      pointer-events: none;
+      // pointer-events: none;
       position: absolute;
       display: block;
       width: 100%;

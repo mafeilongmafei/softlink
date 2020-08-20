@@ -3,7 +3,7 @@ function resolve(dir) {
   return path.join(__dirname, dir);
 }
 module.exports = {
-  publicPath: "/dist",
+  publicPath: "/softlink//dist",
   devServer: {
     open: true,
     port: 8080,
@@ -11,19 +11,19 @@ module.exports = {
     proxy: {
       "/app.php/": {
         target: process.env.VUE_APP_BASE_URL,
-        changOrigin: true //是否跨域
+        changOrigin: true, //是否跨域,
       },
       "/index/": {
         target: process.env.VUE_APP_BASE_URL,
-        changOrigin: true //是否跨域
+        changOrigin: true, //是否跨域
       },
       "/admin.php/": {
         target: process.env.VUE_APP_BASE_URL,
-        changOrigin: true //是否跨域
-      }
-    }
+        changOrigin: true, //是否跨域
+      },
+    },
   },
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     //第一个参数 别名  路径+
     config.resolve.alias
       .set("@", resolve("src"))
@@ -31,5 +31,8 @@ module.exports = {
       .set("assets", resolve("src/assets"))
       .set("views", resolve("src/views"))
       .set("api", resolve("src/request"));
-  }
+  },
+  configureWebpack: {
+    devtool: "source-map",
+  },
 };
