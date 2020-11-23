@@ -3,7 +3,7 @@ function resolve(dir) {
   return path.join(__dirname, dir);
 }
 module.exports = {
-  publicPath: "/softlink//dist",
+  publicPath: "/softlink/dist",
   devServer: {
     open: true,
     port: 8080,

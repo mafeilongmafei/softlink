@@ -2,6 +2,18 @@
   <div class='demo'>
     <video-player class="video-player vjs-custom-skin" ref="videoPlayer" :playsinline="true" :options="playerOptions">
     </video-player>
+    <div class="shop">
+      <ul @click="locationShopInfo">
+        <li>
+          <div class="img">
+            <img  style="width:100%" src="https://img.alicdn.com/imgextra/i1/2201503752466/O1CNA11O9HIC100f11dac9ae0b08547b000h_!!1-0-picassodesign.jpg_220x220.jpg_.webp" alt="">
+          </div>
+          <a href="javascript:void(0)">书架落地客厅简约多层货架铁艺储物书柜钢木</a>
+          <span>去购买</span>
+        </li>
+       
+      </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -50,6 +62,12 @@ export default {
   },
   components: {
     videoPlayer
+  },
+  methods : {
+    locationShopInfo(e) {
+      console.log(e.target)
+      console.log(e.currentTarget)
+    }
   }
 };
 
